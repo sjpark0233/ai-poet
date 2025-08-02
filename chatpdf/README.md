@@ -5,9 +5,14 @@ pip install -r requirements.txt
 
 ---
 
-# 실행
+# MultiQueryRetriever(다중 쿼리 검색기) 실행
 ```bash
-main.py
+python main_mqr.py
 ```
 
 ---
+
+# RetrievalQA 실행
+```bash
+python main_rqa.py
+```
