@@ -9,3 +9,5 @@ pip install -r requirements.txt
 ```bash
 main.py
 ```
+
+---

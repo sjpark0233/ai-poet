@@ -1,5 +1,13 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings
+from langchain_openai import ChatOpenAI
+from langchain.retrievers.multi_query import MultiQueryRetriever
+from langchain.chains import RetrievalQA
 
 #Loader
 loader = PyPDFLoader("unsu.pdf")
@@ -15,4 +23,20 @@ text_splitter = RecursiveCharacterTextSplitter(
 )
 texts = text_splitter.split_documents(pages)
 
-print(texts[0])
+#Embedding
+embeddings_model = OpenAIEmbeddings()
+
+# load it into Chroma
+db = Chroma.from_documents(texts, embeddings_model)
+
+#Question
+question = "아내가 먹고 싶어하는 음식은 무엇이야?"
+llm = ChatOpenAI(temperature=0)
+retriver_from_llm = MultiQueryRetriever.from_llm(
+    retriever=db.as_retriever(),
+    llm=llm
+)
+
+docs = retriver_from_llm.invoke(question)
+print(len(docs))
+print(docs)
