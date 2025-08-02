@@ -28,3 +28,25 @@ localhost:8501
 ```
 https://streamlit.io/cloud
 ```
+
+### create app 통해 배포
+```
+https://ai-poet-sdkn9eejdey9cqmwy9weni.streamlit.app/
+```
+
+---
+### LLaMA 2 경량화 버전
+### 다운로드 : llama-2-7b-chat.ggmlv3.q2_K.bin
+```
+https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML
+```
+
+### pip 설치
+```bash
+pip install ctransformers
+```
+
+### 실행
+```
+streamlit run main_llama.py
+```
